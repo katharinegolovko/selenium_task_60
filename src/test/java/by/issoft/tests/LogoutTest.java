@@ -1,6 +1,6 @@
 package by.issoft.tests;
 
-import by.issoft.pages.LogoutPage;
+import by.issoft.pagefactory.LogoutPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,6 @@ public class LogoutTest {
         logoutPage.preparationStep();
         logoutPage.clickOnUsername();
         logoutPage.clickOnLogoutButton();
-        Assertions.assertTrue(logoutPage.isLoginTitlePresent());
         Assertions.assertTrue(logoutPage.isLoginButtonPresent());
     }
 
