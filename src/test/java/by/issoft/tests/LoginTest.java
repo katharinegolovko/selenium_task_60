@@ -1,6 +1,7 @@
 package by.issoft.tests;
 
 import by.issoft.pagefactory.LoginPage;
+import by.issoft.utils.ScreenshotMaker;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,9 +23,10 @@ public class LoginTest {
     }
 
     @Test
-    void userShouldLoginWithValidCredentials() {
+    void userShouldLoginWithValidCredentials() throws Exception {
         LoginPage loginPage = new LoginPage(driver);
         driver.get("https://mail.yandex.com");
+        ScreenshotMaker.takeSnapShot(driver, "./src/test/resources/homepage.png");
         loginPage.clickGeneralLoginButton();
         loginPage.enterUsername("accountforautotest");
         loginPage.clickLoginButton();
