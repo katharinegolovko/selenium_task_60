@@ -1,18 +1,30 @@
-package by.issoft.pages;
+package by.issoft.pagefactory;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LogoutPage {
 
     WebDriver driver;
 
-    public LogoutPage(WebDriver driver){
+    @FindBy(xpath = "//a//*[@class='user-account__name' and contains(text(), 'accountforautotest')]")
+    private WebElement usernameLabel;
+
+    @FindBy(xpath = "//*[@class='menu__text' and contains(text(), 'Log out')]")
+    private WebElement logOutButton;
+
+    @FindBy(id = "passp:sign-in")
+    private WebElement logInButton;
+
+    public LogoutPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    public void preparationStep(){
+    public void preparationStep() {
         driver.get("https://mail.yandex.com");
         WebElement generalLoginButton = driver.findElement(By.xpath("//span[contains(text(), 'Log in')]//parent::a"));
         generalLoginButton.click();
@@ -27,20 +39,14 @@ public class LogoutPage {
     }
 
     public void clickOnUsername(){
-        WebElement username = driver.findElement(By.xpath("//a//*[@class='user-account__name' and contains(text(), 'accountforautotest')]"));
-        username.click();
+        usernameLabel.click();
     }
 
     public void clickOnLogoutButton(){
-        WebElement logoutButton = driver.findElement(By.xpath("//*[@class='menu__text' and contains(text(), 'Log out')]"));
-        logoutButton.click();
-    }
-
-    public boolean isLoginTitlePresent(){
-        return driver.findElement(By.xpath("//*[contains(text(), 'Log in with Yandex ID to access Yandex.Mail')]")).isDisplayed();
+        logOutButton.click();
     }
 
     public boolean isLoginButtonPresent(){
-        return driver.findElement(By.id("passp:sign-in")).isDisplayed();
+        return logInButton.isDisplayed();
     }
 }
