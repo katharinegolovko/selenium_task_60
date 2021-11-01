@@ -1,7 +1,9 @@
 package by.issoft.tests;
 
 import by.issoft.pagefactory.LogoutPage;
+import by.issoft.utils.TestResultLogger;
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -12,11 +14,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-import static io.qameta.allure.Allure.label;
-
 public class LogoutTest {
 
     private WebDriver driver;
+    TestResultLogger testResultLogger = new TestResultLogger();
+
 
     @BeforeEach
     void setup() {
@@ -26,13 +28,13 @@ public class LogoutTest {
     }
 
     @Test
+    @Issue("1234")
     @Step("User can successfully logout")
     @Description("User can successfully logout")
     void userShouldSuccessfullyLogout() {
-        label("owner", "Katya Golovko");
         LogoutPage logoutPage = new LogoutPage(driver);
         logoutPage.preparationStep();
-        logoutPage.clickOnUsername();
+        //logoutPage.clickOnUsername();
         logoutPage.clickOnLogoutButton();
         Assertions.assertTrue(logoutPage.isLoginButtonPresent());
     }

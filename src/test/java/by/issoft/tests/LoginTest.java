@@ -3,6 +3,7 @@ package by.issoft.tests;
 import by.issoft.pagefactory.LoginPage;
 import by.issoft.utils.ScreenshotMaker;
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -12,8 +13,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
-
-import static io.qameta.allure.Allure.label;
 
 public class LoginTest {
 
@@ -27,10 +26,10 @@ public class LoginTest {
     }
 
     @Test
+    @Issue("1233")
     @Step("User can successfully login")
     @Description("User can successfully login with valid credentials")
     void userShouldLoginWithValidCredentials() throws Exception {
-        label("owner", "Katya Golovko");
         LoginPage loginPage = new LoginPage(driver);
         driver.get("https://mail.yandex.com");
         ScreenshotMaker.takeSnapShot(driver, "./src/test/resources/homepage.png");
