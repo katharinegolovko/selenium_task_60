@@ -1,7 +1,6 @@
 package by.issoft.tests;
 
 import by.issoft.pagefactory.LogoutPage;
-import by.issoft.utils.TestResultLogger;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
@@ -17,8 +16,6 @@ import java.util.concurrent.TimeUnit;
 public class LogoutTest {
 
     private WebDriver driver;
-    TestResultLogger testResultLogger = new TestResultLogger();
-
 
     @BeforeEach
     void setup() {
