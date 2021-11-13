@@ -19,7 +19,7 @@ public class TestBase {
 
     @AfterEach
     void cleanup() {
-        driver.quit();
-        driver = null;
+        driver.close();
+        Driver.setDriver(null);
     }
 }

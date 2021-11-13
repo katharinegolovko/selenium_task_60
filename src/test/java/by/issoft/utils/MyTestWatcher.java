@@ -1,37 +1,21 @@
 package by.issoft.utils;
 
 import io.qameta.allure.Attachment;
-import org.junit.jupiter.api.extension.AfterAllCallback;
+import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.Date;
 
-public class MyTestWatcher implements TestWatcher, AfterAllCallback {
-
-
-    private List<TestResultStatus> testResultsStatus = new ArrayList<>();
-
-
-    private enum TestResultStatus {
-        SUCCESSFUL, ABORTED, FAILED, DISABLED;
-    }
+public class MyTestWatcher implements AfterTestExecutionCallback {
 
     @Override
-    public void testFailed(ExtensionContext extensionContext, Throwable cause) {
-        makeScreenshotOnFailure("failedtest");
-    }
-
-    @Override
-    public void afterAll(ExtensionContext context) throws Exception {
-        Map<TestResultStatus, Long> summary = testResultsStatus.stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    public void afterTestExecution(ExtensionContext context) throws Exception {
+        Boolean testResult = context.getExecutionException().isPresent();
+        if (testResult) {
+            makeScreenshotOnFailure("failedtest" + new Date().getTime());
+        }
     }
 
     @Attachment(value = "{testName} - screenshot", type = "image/png")

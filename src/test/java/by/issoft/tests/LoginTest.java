@@ -2,7 +2,6 @@ package by.issoft.tests;
 
 import by.issoft.pagefactory.LoginPage;
 import by.issoft.utils.MyTestWatcher;
-import by.issoft.utils.ScreenshotMaker;
 import by.issoft.utils.TestBase;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -21,7 +20,6 @@ public class LoginTest extends TestBase {
     void userShouldLoginWithValidCredentials() throws Exception {
         LoginPage loginPage = new LoginPage(driver);
         driver.get("https://mail.yandex.com");
-        ScreenshotMaker.takeSnapShot(driver, "./src/test/resources/homepage.png");
         loginPage.clickGeneralLoginButton();
         loginPage.enterUsername("accountforautotest");
         loginPage.clickLoginButton();
