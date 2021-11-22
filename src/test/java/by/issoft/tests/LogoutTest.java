@@ -22,7 +22,6 @@ public class LogoutTest extends TestBase {
         logoutPage.preparationStep();
         logoutPage.clickOnUsername();
         logoutPage.clickOnLogoutButton();
-        //Assertions.assertTrue(logoutPage.isLoginButtonPresent());
-        Assertions.assertTrue(false);
+        Assertions.assertTrue(logoutPage.isLoginButtonPresent());
     }
 }
