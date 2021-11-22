@@ -1,28 +1,23 @@
 package by.issoft.tests;
 
 import by.issoft.pagefactory.LoginPage;
-import org.junit.jupiter.api.AfterEach;
+import by.issoft.utils.MyTestWatcher;
+import by.issoft.utils.TestBase;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.util.concurrent.TimeUnit;
-
-public class LoginTest {
-
-    private WebDriver driver;
-
-    @BeforeEach
-    void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    }
+@ExtendWith(MyTestWatcher.class)
+public class LoginTest extends TestBase {
 
     @Test
-    void userShouldLoginWithValidCredentials() {
+    @Issue("1233")
+    @Step("User can successfully login")
+    @Description("User can successfully login with valid credentials")
+    void userShouldLoginWithValidCredentials() throws Exception {
         LoginPage loginPage = new LoginPage(driver);
         driver.get("https://mail.yandex.com");
         loginPage.clickGeneralLoginButton();
@@ -33,10 +28,5 @@ public class LoginTest {
         Assertions.assertTrue(loginPage.isInboxPresent());
         Assertions.assertTrue(loginPage.isUsernamePresent());
         Assertions.assertTrue(loginPage.isEmailContainerPresent());
-    }
-
-    @AfterEach
-    void cleanup() {
-        driver.quit();
     }
 }
